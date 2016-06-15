@@ -194,7 +194,7 @@ var displayWork = function() {
 
 displayWork();
 
-
+$("#mapDiv").append(googleMap);
 
 //$("#main").append(internationalizeButton);
 
