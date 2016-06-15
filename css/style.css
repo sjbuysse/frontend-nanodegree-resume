@@ -151,9 +151,10 @@ ul {
 
 .biopic {
   float: left;
-  padding: 10px;
+  padding-top: 0;
   width: 200px;
   display: none;
+  /*align-self: flex-start;*/
 }
 
 img {
@@ -190,6 +191,7 @@ span {
     width: 150px;
   }
   .welcome-message {
+    padding-top: 0;
     display: none;
   }
 }
