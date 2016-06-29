@@ -7,11 +7,14 @@ var bio = {
         "github": "sjbuysse",
         "location": "Perth, Australia"
     },
-    "welcomeMsg": "Hi! I'm happy to have you as my guest, please have a look at my resume and hopefully I can be of value to your project.",
+    "welcomeMessage": "Hi! I'm happy to have you as my guest, please have a look at my resume and hopefully I can be of value to your project.",
     "skills": [ 
         "HTML", "CSS", "Git", "Ruby", "JavaScript", "jQuery", "Bootstrap", "Grunt" 
     ], 
-    "bioPic": "images/selfie-medium.jpg"
+    "bioPic": "images/selfie-medium.jpg", 
+    "display": function() {
+
+    }
 };
 
 var work = {
@@ -167,7 +170,7 @@ $("#topContacts").append(formattedLocation);
 var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
 $("#header").append(formattedBioPic);
 
-var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMsg);
+var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 $("#header").append(formattedWelcome);
 if(bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
