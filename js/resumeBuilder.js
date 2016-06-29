@@ -13,7 +13,32 @@ var bio = {
     ], 
     "bioPic": "images/selfie-medium.jpg", 
     "display": function() {
+        var formattedName = HTMLheaderName.replace("%data%", this.name);
+        var formattedRole = HTMLheaderRole.replace("%data%", this.role);
+        $("#header").prepend(formattedRole);
+        $("#header").prepend(formattedName);
+        var formattedMobile = HTMLmobile.replace("%data%", this.contacts.mobile);
+        $("#topContacts").append(formattedMobile);
+        var formattedEmail = HTMLemail.replace("%data%", this.contacts["email"]);
+        $("#topContacts").append(formattedEmail);
+        var formattedGithub = HTMLgithub.replace("%data%", this.contacts["github"]);
+        $("#topContacts").append(formattedGithub);
+        var formattedLocation = HTMLlocation.replace("%data%", this.contacts["location"]);
+        $("#topContacts").append(formattedLocation);
 
+        var formattedBioPic = HTMLbioPic.replace("%data%", this.bioPic);
+        $("#header").append(formattedBioPic);
+
+        var formattedWelcome = HTMLwelcomeMsg.replace("%data%", this.welcomeMessage);
+        $("#header").append(formattedWelcome);
+
+        if(this.skills.length > 0) {
+            $("#header").append(HTMLskillsStart);
+            for(i=0; i < this.skills.length; i++){
+                var formattedSkill = HTMLskills.replace("%data%", this.skills[i]);
+                $("#skills").append(formattedSkill);
+            }
+        } 
     }
 };
 
@@ -44,7 +69,21 @@ var work = {
             "location": "Sint-Niklaas, Belgium",
             "description": "Managed work flow and inventory in a team environment within a fast-paced distribution center. Collaborated with and communicated across multiple internal departments to solve problems and manage system and process issues. Strategically grouped orders by packaging or type and decided when to process shipments to ensure on-time delivery of goods to customers. Generated reports and monitored progress of goods through a network of sensors using Microsoft Excel.  Analyzed reports multiple times per day to inform decisions."
         }
-    ]
+    ],
+    "display" : function() {
+        this.jobs.forEach(function(job) {
+            $("#workExperience").append(HTMLworkStart);
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+            $(".work-entry:last").append(formattedEmployer + formattedTitle);
+            var formattedDate = HTMLworkDates.replace("%data%", job.dates);
+            $(".work-entry:last").append(formattedDate);
+            var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+            $(".work-entry:last").append(formattedLocation);
+            var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+            $(".work-entry:last").append(formattedDescription);
+        });
+    }
 };
 
 var education = {
@@ -53,31 +92,18 @@ var education = {
             "name": "University of Ghent",
             "location": "Ghent",
             "degree": "Business Engineering",
-            "major": "Operations Management",
-            "dates": "2008-2013",
+            "majors": [ "Operations Management", "Supply Chain Management" ],
+            "dates": "30/06/2013",
+            "url": "www.ugent.be"
         }, {
             "name": "Broederschool",
             "location": "Sint-Niklaas",
-            "degree": "Economie Wiskunde",
-            "major": "Math and Economy",
-            "dates": "2006-2008",
+            "degree": "Economy",
+            "majors": [ "Mathimatics", "Economy" ],
+            "dates": "30/06/2008",
+            "url": "www.broederschool.be"
         }
     ],
-    "displaySchools": function(){
-        this.schools.forEach( function(school){
-            $("#education").append(HTMLschoolStart);
-            var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
-            $(".education-entry:last").append(formattedSchoolName);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
-            $(".education-entry:last").append(formattedSchoolDegree);
-            var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
-            $(".education-entry:last").append(formattedSchoolDates);
-            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-            $(".education-entry:last").append(formattedSchoolLocation);
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.major);
-            $(".education-entry:last").append(formattedSchoolMajor);
-        });
-    },
     "onlineCourses": [
         {
             "title": "Front-end Web Developer Nanodegree",
@@ -101,13 +127,28 @@ var education = {
             "url": "www.teamtreehouse.com"
         }
     ],
-    "displayOnlineCourses": function(){
+    "display": function(){
+        this.schools.forEach( function(school){
+            $("#education").append(HTMLschoolStart);
+            var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+            formattedSchoolName = formattedSchoolName.replace("#", school.url);
+            $(".education-entry:last").append(formattedSchoolName);
+            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+            $(".education-entry:last").append(formattedSchoolDegree);
+            var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
+            $(".education-entry:last").append(formattedSchoolDates);
+            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+            $(".education-entry:last").append(formattedSchoolLocation);
+            school.majors.forEach( function(major) {
+                var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", major);
+                $(".education-entry:last").append(formattedSchoolMajor);
+            })
+        });
         if(this.onlineCourses.length > 0 ){
             $("#education").append(HTMLonlineClasses);
             $("#education").append(HTMLschoolStart);
             this.onlineCourses.forEach(function(course){
                 var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", course.title); 
-                console.log(formattedOnlineTitle);
                 $(".education-entry:last").append(formattedOnlineTitle);
                 var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", course.school); 
                 $(".education-entry:last").append(formattedOnlineSchool);
@@ -116,13 +157,9 @@ var education = {
                 var formattedOnlineURL = HTMLonlineURL.replace("%data%", course.url); 
                 $(".education-entry:last").append(formattedOnlineURL);
             });
-
         }
     }
 };
-
-education.displaySchools();
-education.displayOnlineCourses();
 
 var projects = {
     "projects" : [
@@ -130,7 +167,7 @@ var projects = {
             "title": "Travelblog",
             "dates": "May 2015 - September 2015",
             "description": "A travelblog running on RoR, where users can make a login and add stories that get automatically formatted in a beautiful layout.",
-            "images": []
+            "images": ["images/blog0.jpg","images/blog1.jpg","images/blog2.jpg"]
         }
     ],
     "display": function(){
@@ -149,70 +186,10 @@ var projects = {
         });
     }
 };
-projects.display();
-
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace("%data%", bio.contacts["email"]);
-var formattedGithub = HTMLgithub.replace("%data%", bio.contacts["github"]);
-var formattedLocation = HTMLlocation.replace("%data%", bio.contacts["location"]);
-
-$("#topContacts").append(formattedMobile);
-$("#topContacts").append(formattedEmail);
-$("#topContacts").append(formattedGithub);
-$("#topContacts").append(formattedLocation);
-
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
-$("#header").append(formattedBioPic);
-
-var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-$("#header").append(formattedWelcome);
-if(bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
-    for(i=0; i < bio.skills.length; i++){
-        var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-        $("#skills").append(formattedSkill);
-    }
-} 
-
-var displayWork = function() {
-    work.jobs.forEach(function(job) {
-        $("#workExperience").append(HTMLworkStart);
-        var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
-        var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
-        $(".work-entry:last").append(formattedEmployer + formattedTitle);
-        var formattedDate = HTMLworkDates.replace("%data%", job.dates);
-        $(".work-entry:last").append(formattedDate);
-        var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
-        $(".work-entry:last").append(formattedLocation);
-        var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-        $(".work-entry:last").append(formattedDescription);
-    });
-};
-
-displayWork();
 
 $("#mapDiv").append(googleMap);
 
-//$("#main").append(internationalizeButton);
-
-//var inName = function(fullName) {
-   //var firstName = fullName.trim().split(" ")[0] ;
-   //var lastName = fullName.split(" ")[1] ;
-   //firstName = firstName.slice(0,1).toUpperCase() + firstName.slice(1).toLowerCase();
-   //lastName = lastName.toUpperCase();
-   //return firstName + " " + lastName;
-//};
-
-//var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.currentJob);
-//var formattedSchoolName = HTMLschoolName.replace("%data%", education.name);
-
-//$("#education").append(HTMLschoolStart);
-//$(".education-entry").append(formattedSchoolName);
-//
-
+bio.display();
+education.display();
+projects.display();
+work.display();
