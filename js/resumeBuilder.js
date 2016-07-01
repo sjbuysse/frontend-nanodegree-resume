@@ -53,31 +53,35 @@ var work = {
             "employer": "The Local Shack",
             "dates": "1st of March 2016 - 26th of June 2016",
             "location": "Perth, West Australia",
-            "description": "I was in charge of opening and closing the restaurant, setting the till, inventory management and ordering, and daily debriefing of the staff. I was also responsible for making the roster aiming for optimal revenue/cost ratios. On top of these management duties, I still kept a lot of my barista duties."
+            "description": "I was in charge of opening and closing the restaurant, setting the till, inventory management and ordering, and daily debriefing of the staff. I was also responsible for making the roster aiming for optimal revenue/cost ratios. On top of these management duties, I still kept a lot of my barista duties.",
+            "url" : "http://www.thelocalshack.com.au"
         },{
             "title": "Barista",
             "employer": "The Local Shack",
             "dates": "1st of January 2016 - 29th of February 2016",
             "location": "Perth, West Australia",
-            "description": "I made excellent coffees in a fast paced environment, focusing on speed while maintaining the quality of coffee and aesthetically appealing latte art. I also took orders, waited tables, developed relationships with customers and fellow staff, and cleaned the restaurant at the end of the night."
+            "description": "I made excellent coffees in a fast paced environment, focusing on speed while maintaining the quality of coffee and aesthetically appealing latte art. I also took orders, waited tables, developed relationships with customers and fellow staff, and cleaned the restaurant at the end of the night.",
+            "url" : "http://www.thelocalshack.com.au"
         },{
             "title": "ICT recruiter",
             "employer": "Team4Talent",
             "dates":  "15th of December 2015 - 15th of March 2015",
             "location": "Antwerp, Belgium",
-            "description": "Worked as part of a dynamic four-person team to expand and develop Team4Talent's client base and reputation.  Participated in weekly strategic planning to evaluate company's market position, goals, and short- and long-term action plan. Communicated extensively with project managers and business owners to identify required employee profiles to ensure satisfactory matches for IT placements. Actively searched for matching candidate profiles using the internet, private databases, and my personal circle of connections. Thoroughly screened each candidate and evaluated their placement potential on both a technical and personal level. Acted as a liaison between IT professionals and companies to negotiate client salaries. Maintained strong professional working relationships with each IT professional placed into a team through phone call check ins, team events, frequent feedback, and positive communication."
+            "description": "Worked as part of a dynamic four-person team to expand and develop Team4Talent's client base and reputation.  Participated in weekly strategic planning to evaluate company's market position, goals, and short- and long-term action plan. Communicated extensively with project managers and business owners to identify required employee profiles to ensure satisfactory matches for IT placements. Actively searched for matching candidate profiles using the internet, private databases, and my personal circle of connections. Thoroughly screened each candidate and evaluated their placement potential on both a technical and personal level. Acted as a liaison between IT professionals and companies to negotiate client salaries. Maintained strong professional working relationships with each IT professional placed into a team through phone call check ins, team events, frequent feedback, and positive communication.",
+            "url": "http://www.team4talent.be/en/home-1.htm"
         },{
             "title": "Wave & Inventory Manager",
             "employer": "VF Europe",
             "dates": "3rd of May 2015 - 30th of October 2015",
             "location": "Sint-Niklaas, Belgium",
-            "description": "Managed work flow and inventory in a team environment within a fast-paced distribution center. Collaborated with and communicated across multiple internal departments to solve problems and manage system and process issues. Strategically grouped orders by packaging or type and decided when to process shipments to ensure on-time delivery of goods to customers. Generated reports and monitored progress of goods through a network of sensors using Microsoft Excel.  Analyzed reports multiple times per day to inform decisions."
+            "description": "Managed work flow and inventory in a team environment within a fast-paced distribution center. Collaborated with and communicated across multiple internal departments to solve problems and manage system and process issues. Strategically grouped orders by packaging or type and decided when to process shipments to ensure on-time delivery of goods to customers. Generated reports and monitored progress of goods through a network of sensors using Microsoft Excel.  Analyzed reports multiple times per day to inform decisions.",
+            "url" : "http://www.vfc.com/"
         }
     ],
     "display" : function() {
         this.jobs.forEach(function(job) {
             $("#workExperience").append(HTMLworkStart);
-            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer).replace("#", job.url);
             var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
             $(".work-entry:last").append(formattedEmployer + formattedTitle);
             var formattedDate = HTMLworkDates.replace("%data%", job.dates);
@@ -94,18 +98,25 @@ var education = {
     "schools": [
         {
             "name": "University of Ghent",
-            "location": "Ghent",
-            "degree": "Business Engineering",
+            "location": "Ghent, Belgium",
+            "degree": "Master of Science in Business Engineering",
             "majors": [ "Operations Management", "Supply Chain Management" ],
             "dates": "30/06/2013",
-            "url": "www.ugent.be"
+            "url": "http://www.ugent.be"
         }, {
-            "name": "Broederschool",
-            "location": "Sint-Niklaas",
-            "degree": "Economy",
-            "majors": [ "Mathimatics", "Economy" ],
-            "dates": "30/06/2008",
-            "url": "www.broederschool.be"
+            "name": "NTNU",
+            "location": "Trondheim, Normway",
+            "degree": "Master of Science in Business Engineering",
+            "majors": [],
+            "dates": "30/06/2011",
+            "url": "https://www.ntnu.edu/"
+        }, {
+            "name": "University of Ghent",
+            "location": "Ghent, Belgium",
+            "degree": "Bachelor of Science in Business Engineering",
+            "majors": [],
+            "dates": "30/06/2011",
+            "url": "http://www.ugent.be"
         }
     ],
     "onlineCourses": [
@@ -136,7 +147,7 @@ var education = {
             $("#education").append(HTMLschoolStart);
             var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
             formattedSchoolName = formattedSchoolName.replace("#", school.url);
-            var formattedSchoolName = formattedSchoolName + HTMLschoolDegree.replace("%data%", school.degree);
+            formattedSchoolName = formattedSchoolName + HTMLschoolDegree.replace("%data%", school.degree);
             $(".education-entry:last").append(formattedSchoolName);
             var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
             $(".education-entry:last").append(formattedSchoolDates);
@@ -145,7 +156,7 @@ var education = {
             school.majors.forEach( function(major) {
                 var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", major);
                 $(".education-entry:last").append(formattedSchoolMajor);
-            })
+            });
         });
         if(this.onlineCourses.length > 0 ){
             $("#education").append(HTMLonlineClasses);
@@ -169,13 +180,14 @@ var projects = {
             "title": "Travelblog",
             "dates": "May 2015 - September 2015",
             "description": "A travelblog running on RoR, where users can make a login and add stories that get automatically formatted in a beautiful layout.",
-            "images": ["images/blog0.jpg","images/blog1.jpg","images/blog2.jpg"]
+            "images": ["images/blog0.jpg","images/blog1.jpg","images/blog2.jpg"],
+            "url" : "https://github.com/sjbuysse/Blog"
         }
     ],
     "display": function(){
         this.projects.forEach( function(project){
             $("#projects").append(HTMLprojectStart);
-            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title);
+            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title).replace("#", project.url);
             $(".project-entry:last").append(formattedProjectTitle);
             var formattedProjectDate = HTMLprojectDates.replace("%data%", project.dates);
             $(".project-entry:last").append(formattedProjectDate);
