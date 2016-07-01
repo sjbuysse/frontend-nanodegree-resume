@@ -19,12 +19,16 @@ var bio = {
         $("#header").prepend(formattedName);
         var formattedMobile = HTMLmobile.replace("%data%", this.contacts.mobile);
         $("#topContacts").append(formattedMobile);
+        $("#footerContacts").append(formattedMobile);
         var formattedEmail = HTMLemail.replace("%data%", this.contacts["email"]);
         $("#topContacts").append(formattedEmail);
+        $("#footerContacts").append(formattedEmail);
         var formattedGithub = HTMLgithub.replace("%data%", this.contacts["github"]);
         $("#topContacts").append(formattedGithub);
+        $("#footerContacts").append(formattedGithub);
         var formattedLocation = HTMLlocation.replace("%data%", this.contacts["location"]);
         $("#topContacts").append(formattedLocation);
+        $("#footerContacts").append(formattedLocation);
 
         var formattedBioPic = HTMLbioPic.replace("%data%", this.bioPic);
         $("#header").append(formattedBioPic);
@@ -49,13 +53,13 @@ var work = {
             "employer": "The Local Shack",
             "dates": "1st of March 2016 - 26th of June 2016",
             "location": "Perth, West Australia",
-            "description": "I was in charge of opening and closing the restaurant, doing the banking, inventory management and ordering. I was also responsible for staffing properly while maintaining profitable revenue/cost ratios. On top of these management duties, I still kept a lot of my barista duties."
+            "description": "I was in charge of opening and closing the restaurant, setting the till, inventory management and ordering, and daily debriefing of the staff. I was also responsible for making the roster aiming for optimal revenue/cost ratios. On top of these management duties, I still kept a lot of my barista duties."
         },{
             "title": "Barista",
             "employer": "The Local Shack",
             "dates": "1st of January 2016 - 29th of February 2016",
             "location": "Perth, West Australia",
-            "description": "I made excellent coffees in a fast paced environment, I took orders, waited tables, developed relationships with customers and fellow staff, and cleaned the restaurant at the end of the night."
+            "description": "I made excellent coffees in a fast paced environment, focusing on speed while maintaining the quality of coffee and aesthetically appealing latte art. I also took orders, waited tables, developed relationships with customers and fellow staff, and cleaned the restaurant at the end of the night."
         },{
             "title": "ICT recruiter",
             "employer": "Team4Talent",
@@ -132,9 +136,8 @@ var education = {
             $("#education").append(HTMLschoolStart);
             var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
             formattedSchoolName = formattedSchoolName.replace("#", school.url);
+            var formattedSchoolName = formattedSchoolName + HTMLschoolDegree.replace("%data%", school.degree);
             $(".education-entry:last").append(formattedSchoolName);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
-            $(".education-entry:last").append(formattedSchoolDegree);
             var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
             $(".education-entry:last").append(formattedSchoolDates);
             var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
@@ -149,9 +152,8 @@ var education = {
             $("#education").append(HTMLschoolStart);
             this.onlineCourses.forEach(function(course){
                 var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", course.title); 
+                formattedOnlineTitle = formattedOnlineTitle + HTMLonlineSchool.replace("%data%", course.school); 
                 $(".education-entry:last").append(formattedOnlineTitle);
-                var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", course.school); 
-                $(".education-entry:last").append(formattedOnlineSchool);
                 var formattedOnlineDates = HTMLonlineDates.replace("%data%", course.dates); 
                 $(".education-entry:last").append(formattedOnlineDates);
                 var formattedOnlineURL = HTMLonlineURL.replace("%data%", course.url); 
