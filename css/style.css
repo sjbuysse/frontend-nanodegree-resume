@@ -154,7 +154,6 @@ ul {
   padding-top: 0;
   width: 200px;
   display: none;
-  /*align-self: flex-start;*/
 }
 
 img {
@@ -163,6 +162,22 @@ img {
 
 span {
   padding: 5px;
+}
+
+.project-entry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.project-entry a, .project-entry p, .project-entry .date-text {
+    width: 100%;
+}
+
+.project-image {
+    padding-left: 0;
+    width: 100%;
+    align-self: flex-start;
 }
 
 #lets-connect {
@@ -213,4 +228,30 @@ span {
   .biopic {
     display: block;
   }
+  .project-image{
+      width: 48%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #skills-h3,
+  .biopic {
+    display: block;
+  }
+  .project-image{
+      width: 31%;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+    .work-entry .location-text {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    #name, #name + span {
+        display: block;
+        text-align: center;
+    }
 }
